@@ -27,13 +27,12 @@ RUN pip install catkin_tools catkin_tools_fetch empy
 WORKDIR /root/catkin_ws
 RUN catkin init
 
-WORKDIR /root/catkin_ws/src
 # Clone the catkin repository
-RUN git clone https://github.com/ros/catkin.git
+RUN git clone https://github.com/ros/catkin.git /root/catkin_ws/src/catkin
 # Clone the point_labeler repository into the catkin workspace
-RUN git clone https://github.com/jbehley/point_labeler.git
+RUN git clone https://github.com/jbehley/point_labeler.git /root/catkin_ws/src/point_labeler
 # Clone the SuMa repository
-RUN git clone https://github.com/jbehley/SuMa.git
+RUN git clone https://github.com/jbehley/SuMa.git /root/catkin_ws/src/SuMa
 
 # Fetch dependencies
 RUN catkin deps fetch
@@ -41,7 +40,7 @@ RUN catkin deps fetch
 RUN catkin build --save-config -i --cmake-args -DCMAKE_BUILD_TYPE=Release -DOPENGL_VERSION=450 -DENABLE_NVIDIA_EXT=YES
 
 # Change settings to velodyne vlp16 as default
-RUN mv /root/catkin_ws/src/SuMa/config/default.xml /root/catkin_ws/src/SuMa/config/defaultBKP && \
+RUN mv /root/catkin_ws/src/SuMa/config/default.xml /root/catkin_ws/src/SuMa/config/HDL-64E && \
     mv /root/catkin_ws/src/SuMa/config/vlp16_example.xml /root/catkin_ws/src/SuMa/config/default.xml
 
 # Create the KITTI dataset directory structure
