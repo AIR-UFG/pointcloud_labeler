@@ -4,14 +4,14 @@ This Dockerfile sets up an environment for using the Pointcloud Labeler with ROS
 
 ## Features
 
-- [Point Labeler](https://github.com/jbehley/point_labeler): A tool for manually labeling point clouds.
 - [SuMa](https://github.com/jbehley/SuMa): A package for surfel-based mapping and 3D reconstruction.
+- [Point Labeler](https://github.com/jbehley/point_labeler): A tool for manually labeling point clouds.
 
 ## Setup
 
 1. **Clone this repository:**
    ```bash
-   git clone https://github.com/alunos-pfc/pointcloud_labeler.git
+   git clone --recurse-submodules https://github.com/AIR-UFG/pointcloud_labeler.git
    cd pointcloud_labeler
    ```
 
@@ -25,7 +25,7 @@ This Dockerfile sets up an environment for using the Pointcloud Labeler with ROS
    To run the Docker container, utilize the provided run script with the following parameters:
 
    ```bash
-   ./run.sh pointcloud_labeler [--rm] [--nvidia]
+   ./run.sh pointcloud_labeler --rm [--nvidia]
    ```
 
 - `<image-name>`: The name you assigned to the Docker image during the build process.
@@ -52,7 +52,7 @@ This folder structure is linked to the `/root/dataset/sequences/00/` directory w
    The SuMa visualizer is used to calculate the poses of the point cloud data.
    - Within the container, navigate to SuMa's bin directory and run SuMa visualizer:
      ```bash
-     cd /root/catkin_ws/src/SuMa/bin
+     cd /root/SuMa/bin
      ./visualizer
      ```
    - Open the first `.bin` file of the point cloud in the `/root/dataset/sequences/00/velodyne` folder.
@@ -62,7 +62,7 @@ This folder structure is linked to the `/root/dataset/sequences/00/` directory w
 3. **Run Point Labeler:**
    - Within the container, navigate to the Point Labeler's bin directory and run the Point Labeler:
      ```bash
-     cd /root/catkin_ws/src/point_labeler/bin
+     cd /root/point_labeler/bin
      ./labeler
      ```
    - Open the `/root/dataset/sequences/00/` folder inside the Point Labeler to start manually labeling the point cloud.
