@@ -1,6 +1,6 @@
 # Pointcloud Labeler Dockerfile
 
-This Dockerfile sets up an environment for using the Pointcloud Labeler with ROS2 (Robot Operating System) and SuMa (Surfels for Mapping) for point cloud processing.
+This Dockerfile sets up an environment for using the Pointcloud Labeler and SuMa for pointcloud processing.
 
 ## Features
 
@@ -58,6 +58,8 @@ This folder structure is linked to the `/root/dataset/sequences/00/` directory w
    - Open the first `.bin` file of the point cloud in the `/root/dataset/sequences/00/velodyne` folder.
    - Press the play button to calculate poses.
    - Save the `poses.txt` file to `/root/dataset/sequences/00/`.
+
+   For more information on how to use SuMa, please refer to the [SuMa documentation](https://github.com/jbehley/SuMa).
 
 3. **Run Point Labeler:**
    - Within the container, navigate to the Point Labeler's bin directory and run the Point Labeler:
