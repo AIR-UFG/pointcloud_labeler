@@ -43,12 +43,8 @@ RUN cmake --build build
 RUN mkdir -p /root/dataset/sequences/00/velodyne && \
     mkdir -p /root/dataset/sequences/00/labels
 
-# Create the KITTI calibration file
-RUN echo -e "P0: 1 0 0 0 0 1 0 0 0 0 1 0\n\
-P1: 1 0 0 0 0 1 0 0 0 0 1 0\n\
-P2: 1 0 0 0 0 1 0 0 0 0 1 0\n\
-P3: 1 0 0 0 0 1 0 0 0 0 1 0\n\
-Tr: 1 0 0 0 0 1 0 0 0 0 1 0" > /root/dataset/sequences/00/calib.txt
+# Copy the KITTI calibration file
+COPY /files/calib.txt /root/dataset/sequences/00/calib.txt
 
 # Add aliases to the bashrc
 RUN echo "alias visualizer='cd /root/SuMa/bin && ./visualizer'" >> ~/.bashrc && \
