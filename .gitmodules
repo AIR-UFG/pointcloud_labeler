@@ -1,6 +1,3 @@
 [submodule "Docker/files/point_labeler"]
 	path = Docker/files/point_labeler
 	url = https://github.com/jbehley/point_labeler.git
-[submodule "Docker/files/SuMa"]
-	path = Docker/files/SuMa
-	url = https://github.com/jbehley/SuMa.git
