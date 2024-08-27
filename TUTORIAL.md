@@ -9,6 +9,7 @@ Any information not included here can be found in the [official wiki](https://gi
 First, you need to follow the instructions in the README to set up the environment. It's worth noting that if the poses of the data have already been calculated, it is not necessary to run SuMa.
 
 After that, with the tool already open, just click on the 'open' icon in the top left corner, navigate to the folder where the data is located, and choose a sequence to start annotating.
+
 ![image](https://github.com/user-attachments/assets/e96e1be5-151b-45b8-8dbc-0f274147dc01)
 
 As soon as the point cloud is loaded, the program may become slow due to the large number of points. 
