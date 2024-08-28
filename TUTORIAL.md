@@ -5,6 +5,8 @@ This document aims to outline the annotation process used within our organizatio
 It does not cover every detail regarding the tool, only those considered important for our purpose. 
 Any information not included here can be found in the [official wiki](https://github.com/jbehley/point_labeler/wiki).
 
+Here's a example of the tool being used: https://youtu.be/M2yZK8pMTyQ
+
 ## First Steps
 First, you need to follow the instructions in the README to set up the environment. It's worth noting that if the poses of the data have already been calculated, it is not necessary to run SuMa.
 
@@ -53,5 +55,12 @@ Similar to the previous tool, the `remove with plane` performs the same process 
 
 ![image](https://github.com/user-attachments/assets/9e027899-79f2-4daf-8247-b15ce2a18487)
 
+## What’s Next
+
+After finishing the annotation, it is important to click on the `save` icon in the top left corner and proceed to the next tiles until you have annotated the entire point cloud.
+
+![image](https://github.com/user-attachments/assets/231d85ba-e3a1-460d-9ad2-3b91506d09a2)
+
+Finally, all the annotations made will be present in the `labels` folder of the respective sequence, following the Semantic KITTI format.
 
 
