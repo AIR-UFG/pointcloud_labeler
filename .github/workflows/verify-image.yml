@@ -1,0 +1,17 @@
+name: Verify Docker Build
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  verify-image:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4
+      with:
+        submodules: true
+    - name: Build the Docker image
+      run: |
+        docker build -t pointcloud_labeler Docker
