@@ -81,13 +81,11 @@ fi
 
 # Get the absolute path of the directory this script is in
 CURRENT_DIR="$(pwd)"
-POINTCLOUD_DIR="${CURRENT_DIR}/pointcloud-files"
+SHARED_DIR="${CURRENT_DIR}/shared-dir"
 
-# Check if the pointcloud-files folder exists, and create it if not
-if [ ! -d "${POINTCLOUD_DIR}" ]; then
-    mkdir "${POINTCLOUD_DIR}"
-    mkdir -p "${POINTCLOUD_DIR}/bin-files"
-    mkdir -p "${POINTCLOUD_DIR}/labels"
+# Check if the shared-dir folder exists, and create it if not
+if [ ! -d "${SHARED_DIR}" ]; then
+    mkdir "${SHARED_DIR}"
 fi
 
 # Relax X server permissions so that local X connections work; this is necessary
@@ -102,8 +100,7 @@ docker run -it \
   -e XAUTHORITY=$XAUTH \
   -v "$XAUTH:$XAUTH" \
   -v "/tmp/.X11-unix:/tmp/.X11-unix" \
-  -v "${POINTCLOUD_DIR}/bin-files:/root/dataset/sequences/00/velodyne" \
-  -v "${POINTCLOUD_DIR}/labels:/root/dataset/sequences/00/labels" \
+  -v "${SHARED_DIR}:/root/shared-dir" \
   $DOCKER_OPTS \
   $IMG
 
