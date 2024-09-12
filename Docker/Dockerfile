@@ -17,21 +17,6 @@ RUN apt update && \
     libglew-dev && \
     rm -rf /var/lib/apt/lists/*
 
-# Install catkin
-RUN pip install catkin_tools catkin_tools_fetch empy
-
-# Copy the SuMa repository
-COPY /files/SuMa /root/SuMa
-
-# Change settings to velodyne vlp16 as default
-RUN mv /root/SuMa/config/default.xml /root/SuMa/config/HDL-64E && \
-    mv /root/SuMa/config/vlp16_example.xml /root/SuMa/config/default.xml
-
-# Build the SuMa project
-WORKDIR /root/SuMa/build
-RUN cmake .. -DCMAKE_BUILD_TYPE=Release -DOPENGL_VERSION=450 -DENABLE_NVIDIA_EXT=YES
-RUN make
-
 # Copy the point_labeler repository
 COPY /files/point_labeler /root/point_labeler
 
@@ -39,15 +24,7 @@ WORKDIR /root/point_labeler
 RUN cmake -S . -B build
 RUN cmake --build build
 
-# Create the KITTI dataset directory structure
-RUN mkdir -p /root/dataset/sequences/00/velodyne && \
-    mkdir -p /root/dataset/sequences/00/labels
-
-# Copy the KITTI calibration file
-COPY /files/calib.txt /root/dataset/sequences/00/calib.txt
-
 # Add aliases to the bashrc
-RUN echo "alias visualizer='cd /root/SuMa/bin && ./visualizer'" >> ~/.bashrc && \
-    echo "alias labeler='cd /root/point_labeler/bin && ./labeler'" >> ~/.bashrc
+RUN echo "alias labeler='cd /root/point_labeler/bin && ./labeler'" >> ~/.bashrc
 
 WORKDIR /root
