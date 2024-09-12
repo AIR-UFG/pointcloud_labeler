@@ -24,7 +24,7 @@ WORKDIR /root/point_labeler
 RUN cmake -S . -B build
 RUN cmake --build build
 
-# Add aliases to the bashrc
+# Add alias to the bashrc
 RUN echo "alias labeler='cd /root/point_labeler/bin && ./labeler'" >> ~/.bashrc
 
 WORKDIR /root
