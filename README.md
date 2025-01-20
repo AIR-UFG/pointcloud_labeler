@@ -16,6 +16,12 @@ This Dockerfile sets up an environment for using the Pointcloud Labeler.
    docker build -t pointcloud_labeler Docker
    ```
 
+   If you face any issues with the zoom functionality, build the Docker image with the following command:
+   ```bash
+   docker build --build-arg ZOOM_ISSUE=true -t pointcloud_labeler Docker
+   ```
+   This will apply the workaround for the zoom issue. For more information, refer to the [Zoom Issue](#zoom-issue) section.
+
 3. **Run the Docker container:**
 
    To run the Docker container, utilize the provided run script with the following parameters:
@@ -59,7 +65,7 @@ While using the tool, it was observed that zooming with the mouse wheel may not 
 
 With this in mind, our team implemented a workaround by modifying a portion of the code in the function responsible for handling zoom. 
 
-If you are interested in applying the same solution, simply replace the `Viewport.cpp` file located at `/root/point_labeler/src/widget/Viewport.cpp` with the `Viewport.cpp` file provided in the root of this repository.
+If you are interested in applying the same solution, simply replace the `Viewport.cpp` file located at `/root/point_labeler/src/widget/Viewport.cpp` with the `Viewport.cpp` file located in the `Docker/files` folder.
 
 The modification essentially updates the `wheelEvent` function by normalizing the delta value within the `if` block as follows:
 ```cpp
