@@ -21,10 +21,13 @@ jobs:
     - name: Build the Docker image
       run: |
           docker build -t ${{ secrets.DOCKER_HUB_USERNAME_OPEDROMARTINS }}/pointcloud_labeler:latest Docker
+          docker build --build-arg ZOOM_ISSUE=true -t ${{ secrets.DOCKER_HUB_USERNAME_OPEDROMARTINS }}/pointcloud_labeler:fixed-zoom-issue Docker
     - name: Push the image to Docker Hub
       run: |
           DATE=$(date +"%d%b%Y-%H-%M")
           docker tag ${{ secrets.DOCKER_HUB_USERNAME_OPEDROMARTINS }}/pointcloud_labeler:latest ${{ secrets.DOCKER_HUB_USERNAME_OPEDROMARTINS }}/pointcloud_labeler:$DATE
+          docker tag ${{ secrets.DOCKER_HUB_USERNAME_OPEDROMARTINS }}/pointcloud_labeler:fixed-zoom-issue ${{ secrets.DOCKER_HUB_USERNAME_OPEDROMARTINS }}/pointcloud_labeler:fixed-zoom-issue-$DATE
 
           docker push ${{ secrets.DOCKER_HUB_USERNAME_OPEDROMARTINS }}/pointcloud_labeler:$DATE
+          docker push ${{ secrets.DOCKER_HUB_USERNAME_OPEDROMARTINS }}/pointcloud_labeler:fixed-zoom-issue-$DATE
           docker push ${{ secrets.DOCKER_HUB_USERNAME_OPEDROMARTINS }}/pointcloud_labeler:latest
