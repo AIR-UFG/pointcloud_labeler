@@ -16,6 +16,12 @@ This Dockerfile sets up an environment for using the Pointcloud Labeler.
    docker build -t pointcloud_labeler Docker
    ```
 
+   If you face any issues with the zoom functionality, build the Docker image with the following command:
+   ```bash
+   docker build --build-arg ZOOM_ISSUE=true -t pointcloud_labeler Docker
+   ```
+   This will apply the workaround for the zoom issue. For more information, refer to the [Zoom Issue](#zoom-issue) section.
+
 3. **Run the Docker container:**
 
    To run the Docker container, utilize the provided run script with the following parameters:
@@ -53,6 +59,23 @@ This folder is linked to the `/root/shared-dir` directory within the container. 
 - An alias are added to facilitate common commands:
   - `labeler`: Launches the Point Labeler tool.
 - The `run.bash` script launches the Docker container with appropriate configurations for GUI display and volume mounts.
+
+## Zoom Issue
+While using the tool, it was observed that zooming with the mouse wheel may not function correctly, depending on the specific mouse model and the operating system version. As stated in [Issue with Zooming Using the Mouse Wheel #84](https://github.com/jbehley/point_labeler/issues/84) on the official repository, the author has indicated no current plans to address UX improvements.
+
+With this in mind, our team implemented a workaround by modifying a portion of the code in the function responsible for handling zoom. 
+
+If you are interested in applying the same solution, simply replace the `Viewport.cpp` file located at `/root/point_labeler/src/widget/Viewport.cpp` with the `Viewport.cpp` file located in the `Docker/files` folder.
+
+The modification essentially updates the `wheelEvent` function by normalizing the delta value within the `if` block as follows:
+```cpp
+if (!numPixels.isNull()) {
+   delta = numPixels.y() / 120.f; // solution
+} else if (!numDegrees.isNull()) {
+   delta = numDegrees.y() / 15.f; 
+}
+```
+It is important to note that this change may alter the intended behavior of the tool. Use it only if you are experiencing issues with zoom functionality.
 
 
 ## Credits

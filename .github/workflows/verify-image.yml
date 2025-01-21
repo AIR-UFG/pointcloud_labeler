@@ -15,3 +15,4 @@ jobs:
     - name: Build the Docker image
       run: |
         docker build -t pointcloud_labeler Docker
+        docker build --build-arg ZOOM_ISSUE=true -t pointcloud_labeler Docker
